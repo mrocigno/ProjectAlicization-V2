@@ -10,16 +10,21 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 
 object Network {
 
-    val retrofit = Retrofit.Builder()
-        .baseUrl("https://www.mangatown.com/")
+    private val gsonConverter =
+        GsonConverterFactory.create(GsonBuilder()
+            .setFieldNamingPolicy(FieldNamingPolicy.IDENTITY)
+            .create())
+
+    private val okhttpClient =
+        OkHttpClient.Builder()
+            .addInterceptor(HttpLoggingInterceptor()
+                .setLevel(HttpLoggingInterceptor.Level.BODY))
+            .build()
+
+    val retrofit: Retrofit = Retrofit.Builder()
+        .baseUrl("https://www.project-alicization-v2.com.br/")
         .addConverterFactory(ScalarsConverterFactory.create())
-        .addConverterFactory(GsonConverterFactory.create(
-            GsonBuilder().apply {
-                setFieldNamingPolicy(FieldNamingPolicy.IDENTITY)
-            }.create()
-        ))
-        .client(OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor())
-            .build())
+        .addConverterFactory(gsonConverter)
+        .client(okhttpClient)
         .build()
 }
