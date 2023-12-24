@@ -14,5 +14,8 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Alicization"
+
 include(":app")
- 
+
+include(":structure")
+include(":structure:network")
