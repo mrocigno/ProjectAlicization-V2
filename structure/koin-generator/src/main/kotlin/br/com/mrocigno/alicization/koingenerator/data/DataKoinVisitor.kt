@@ -2,13 +2,10 @@ package br.com.mrocigno.alicization.koingenerator.data
 
 import br.com.mrocigno.alicization.koingenerator.asOutputStreamWriter
 import br.com.mrocigno.alicization.koingenerator.writeLine
-import com.google.devtools.ksp.getDeclaredFunctions
 import com.google.devtools.ksp.processing.Dependencies
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 import com.google.devtools.ksp.symbol.KSClassDeclaration
-import com.google.devtools.ksp.symbol.KSFunctionDeclaration
 import com.google.devtools.ksp.symbol.KSVisitorVoid
-import com.google.devtools.ksp.visitor.KSDefaultVisitor
 import java.io.OutputStreamWriter
 
 class DataKoinVisitor(
