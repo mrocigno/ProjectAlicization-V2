@@ -1,4 +1,3 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
@@ -33,6 +32,14 @@ dependencies {
 
     implementation(libs.retrofit)
     implementation(libs.jsoup)
+    implementation(libs.koin)
+    implementation(libs.androidx.startup)
 
+    // Local modules:
+    implementation(project(":structure:common"))
     implementation(project(":structure:network"))
+
+    implementation(project(":data"))
+    implementation(project(":data:local"))
+    implementation(project(":data:remote"))
 }

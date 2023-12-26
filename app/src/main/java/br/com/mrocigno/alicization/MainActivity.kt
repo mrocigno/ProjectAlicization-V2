@@ -11,15 +11,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import br.com.mrocigno.alicization.data.repository.HomeRepository
 import br.com.mrocigno.alicization.network.Network
 import br.com.mrocigno.alicization.ui.theme.AlicizationTheme
 import org.jsoup.Jsoup
+import org.koin.android.ext.android.inject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.http.GET
 
 class MainActivity : ComponentActivity() {
+
+    val teste: HomeRepository by inject()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -31,6 +36,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Greeting("Android")
                     Button(onClick = {
+
 
                         /*do things*/
                         Network.retrofit.create(Teste::class.java).get().enqueue(object : Callback<String> {
@@ -47,7 +53,7 @@ class MainActivity : ComponentActivity() {
                             }
                         })
                     }) {
-                        Text("Butão")
+                        Text(teste.getHome())
                     }
                 }
             }

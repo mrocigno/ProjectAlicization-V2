@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 pluginManagement {
     repositories {
         google()
@@ -19,3 +21,9 @@ include(":app")
 
 include(":structure")
 include(":structure:network")
+include(":structure:koin-generator")
+include(":structure:common")
+
+include(":data")
+include(":data:local")
+include(":data:remote")
