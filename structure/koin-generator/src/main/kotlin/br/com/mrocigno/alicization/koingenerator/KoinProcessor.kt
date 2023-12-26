@@ -7,7 +7,6 @@ import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.processing.SymbolProcessor
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 import com.google.devtools.ksp.symbol.KSAnnotated
-import java.io.OutputStreamWriter
 
 class KoinProcessor(
     private val environment: SymbolProcessorEnvironment
@@ -19,10 +18,12 @@ class KoinProcessor(
         if (invoked) return emptyList()
 
         val annotated = resolver.getSymbolsWithAnnotation(DataKoinAdapter::class.java.name)
-        val logFile = environment.codeGenerator.createNewFile(Dependencies(false), "", "log", "txt")
-        OutputStreamWriter(logFile).use { log ->
-            annotated.forEach { it.accept(DataKoinVisitor(environment, log), Unit) }
-        }
+        environment.codeGenerator
+            .createNewFile(Dependencies(false), "", "log", "txt")
+            .asOutputStreamWriter()
+            .use { log ->
+                annotated.forEach { it.accept(DataKoinVisitor(environment, log), Unit) }
+            }
 
         invoked = true
         return annotated.toList()
