@@ -6,5 +6,5 @@ import br.com.mrocigno.alicization.koingenerator.data.DataKoinAdapter
 @DataKoinAdapter
 interface HomeData {
 
-    fun getHomeItems(): List<Book>
+    suspend fun getHomeItems(): List<Book>
 }

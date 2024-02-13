@@ -5,7 +5,7 @@ import br.com.mrocigno.alicization.data.repository.HomeData
 
 class HomeDataLocalImpl : HomeData {
 
-    override fun getHomeItems(): List<Book> {
+    override suspend fun getHomeItems(): List<Book> {
         return listOf(Book("local", "", "", ""))
     }
 }

@@ -13,5 +13,4 @@ class RemoteInitialization : ModuleInitializer() {
             declareHomeDataRemote { HomeDataRemoteImpl() }
         }
     )
-
 }
