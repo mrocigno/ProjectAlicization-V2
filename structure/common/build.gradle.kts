@@ -9,4 +9,5 @@ dependencies {
 
     api(libs.koin)
     api(libs.androidx.startup)
+    api(libs.coil)
 }

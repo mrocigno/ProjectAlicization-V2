@@ -1,4 +1,4 @@
-package br.com.mrocigno.alicization.network
+package br.com.mrocigno.alicization.remote
 
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder

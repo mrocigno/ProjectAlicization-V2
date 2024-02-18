@@ -8,6 +8,6 @@ class HomeRepository(
 ) {
 
     fun getHome() = flow {
-        emit("${localHomeData.getHomeItems().first().name}  ${remoteHomeData.getHomeItems().first().name}")
+        emit(remoteHomeData.getHomeItems())
     }
 }

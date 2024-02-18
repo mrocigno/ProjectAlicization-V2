@@ -18,25 +18,6 @@ open class ResponseFlow<T> {
 
     protected val stateFlow: MutableStateFlow<RequestState<T>> = MutableStateFlow(RequestState.Initial)
 
-    @Composable
-    fun collectAsState(
-        initial: T? = null,
-        lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
-        minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
-        context: CoroutineContext = EmptyCoroutineContext
-    ): State<ComposeResponseFlowWrapper<T>> {
-        if (initial != null) stateFlow.compareAndSet(stateFlow.value, RequestState.Success(initial))
-        return produceState(ComposeResponseFlowWrapper(initial), this, lifecycleOwner.lifecycle, minActiveState, context) {
-            lifecycleOwner.lifecycle.repeatOnLifecycle(minActiveState) {
-                if (context == EmptyCoroutineContext) {
-                    stateFlow.collect { this@produceState.value = it.toComposeResponseFlowWrapper() }
-                } else withContext(context) {
-                    stateFlow.collect { this@produceState.value = it.toComposeResponseFlowWrapper() }
-                }
-            }
-        }
-    }
-
     var value: T? = null
 
     fun collect(
@@ -67,6 +48,25 @@ open class ResponseFlow<T> {
                     actions.onErrorState?.invoke(it.t)
                 }
                 else -> { /* do nothing */ }
+            }
+        }
+    }
+
+    @Composable
+    fun collectAsState(
+        initial: T? = null,
+        lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
+        minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
+        context: CoroutineContext = EmptyCoroutineContext
+    ): State<ComposeResponseFlowWrapper<T>> {
+        if (initial != null) stateFlow.compareAndSet(stateFlow.value, RequestState.Success(initial))
+        return produceState(ComposeResponseFlowWrapper(initial), this, lifecycleOwner.lifecycle, minActiveState, context) {
+            lifecycleOwner.lifecycle.repeatOnLifecycle(minActiveState) {
+                if (context == EmptyCoroutineContext) {
+                    stateFlow.collect { this@produceState.value = it.toComposeResponseFlowWrapper() }
+                } else withContext(context) {
+                    stateFlow.collect { this@produceState.value = it.toComposeResponseFlowWrapper() }
+                }
             }
         }
     }

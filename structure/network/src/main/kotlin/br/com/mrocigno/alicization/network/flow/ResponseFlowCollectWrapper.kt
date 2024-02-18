@@ -33,7 +33,7 @@ sealed class RequestState<out T> {
     fun <T> toComposeResponseFlowWrapper() = ComposeResponseFlowWrapper(
         isLoading = this is Loading,
         isEmpty = this is Empty || this is Initial,
-        error = (this as? Error)?.t,
-        data = (this as? Success<T>)?.data
+        _error = (this as? Error)?.t,
+        _data = (this as? Success<T>)?.data
     )
 }
