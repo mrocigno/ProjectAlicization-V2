@@ -1,4 +1,4 @@
-package br.com.mrocigno.alicization.data.repository
+package br.com.mrocigno.alicization.data.repository.home
 
 import kotlinx.coroutines.flow.flow
 

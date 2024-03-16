@@ -1,5 +1,6 @@
 package br.com.mrocigno.alicization.network.flow
 
+import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.produceState
@@ -53,6 +54,7 @@ open class ResponseFlow<T> {
     }
 
     @Composable
+    @SuppressLint("StateFlowValueCalledInComposition")
     fun collectAsState(
         initial: T? = null,
         lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,

@@ -23,7 +23,7 @@ class KoinProcessor(
 
         runCatching {
             environment.codeGenerator
-                .createNewFile(Dependencies(false), "", "log", "txt")
+                .createNewFile(Dependencies(false), "", "log ${System.currentTimeMillis()}", "txt")
                 .asOutputStreamWriter()
         }.getOrElse {
             OutputStreamWriter(ByteArrayOutputStream())
